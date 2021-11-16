@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>  
+    <link rel="stylesheet" href="contact-us.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>  
+</head>
+
+<div id="web-page">
+    <div id="mother">
+    <div id="left-bar">
+        <div class="navigator">
+            <ul>
+                <li class="list ">
+                    <a href="./home.html">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="profile.html">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li class="list active">
+                    <a href="./contact-us.html">
+                        <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+                        <span class="title">Contact us</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./settings.html">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./help.html">
+                        <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+            
+            </ul>
+            </div>
+            
+    </div>
+
+
+
+    <header id="email-config" class="unvisitable">
+        <div class="wrapper">
+            <div class="title">
+                <header>Send us a Message</header>
+                <ion-icon name="close-sharp"name="close-sharp" id="close" type="button" class="icon1" ></ion-icon>
+            </div>
+            <form >
+            <div class="dbl-field">
+            <div class="field">
+                <input id="name" type="text"  placeholder="Enter your name">
+                <div id="name-error" class="error-message"></div>
+                <i class='fas fa-user'></i>
+            </div>
+            <div class="field">
+                <input id="last-name" type="text"  placeholder="Enter your last name">
+                <div id="last-name-error" class="error-message"></div>
+                <i class='fas fa-user'></i>
+            </div>
+            </div>
+            <div class="dbl-field">
+            <div class="field">
+                <input id="phone" type="text"  placeholder="Enter your phone">
+                <div id="phone-error" class="error-message"></div>
+                <i class='fas fa-phone-alt'></i>
+            </div>
+            <div class="field">
+                <input id='email' type="text" placeholder="Enter your email">
+                <div id="email-error" class="error-message"></div>
+                <i class='fas fa-envelope'></i>
+            </div>
+            </div>
+            <div class="message">
+                <textarea id='message' placeholder="Write your message" ></textarea>
+                <div id="message-error" class="error-message"></div>
+                <i class="material-icons">message</i>
+            </div>
+            <div class="button-area ">
+                <button type="button"  id="send-email-remove">Send Message</button>
+                    <p class="" id="loading-text1">    <p class="" id="after1"></p> <p class="" id="after2"></p> <p class="" id="after3"> </p>             </p>
+                    <div class="" id="loading-bar1"></div>    
+            </div>
+        </form>
+        </div>
+    </header>
+
+
+
+    <section>
+        <img src="./images/moon.png" id="moon">
+        <img src="./images/stars.png" id="stars">
+        <img src="./images/mountains_behind.png" id="mountains_behind">
+        <img src="./images/mountains_front.png" id="mountains_front">
+        <div id="btn-show-container">
+            <button class="btn-show" id="btn-show" type="button">Send a Message</button>
+        </div>
+    </section>
+    </div>
+    <div class="sec" id="sec">
+        <h2>Contacts:</h2>
+        <br>
+        <p> Tel: 0753 807 109<br><br>Email: ionut.csndrea@gmail.com<br><br><br>    <a href="https://www.facebook.com/profile.php?id=100056523570283"><ion-icon class="facebook" name="logo-facebook"></ion-icon></a>   <a href=""><ion-icon class="instagram" name="logo-instagram"></ion-icon></a>  <a href=""><ion-icon class="tik-tok" name="logo-tiktok"></ion-icon></a>   </p>                          
+    </div>
+
+</div>
+</body>
+<script>
+    window.onload = function(){
+    const capitalizeFirstLetter = function(string){
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    }
+
+    const validateEmail = function(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase())
+    }
+
+    let stars = document.getElementById('stars')
+    let moon = document.getElementById('moon')
+    let mountains_behind = document.getElementById('mountains_behind')
+    let text = document.getElementById('text')
+    let btn = document.getElementById('btn')
+    let mountains_front = document.getElementById('mountains_front')
+    let btnShow = document.getElementById('btn-show')
+    let emailConfig = document.getElementById('email-config')
+    let close = document.getElementById('close')
+    let closeEmail = document.getElementById('send-email-remove')
+
+    closeEmail.addEventListener('click', function() {
+        let formValid = true;
+
+        let validFields ={
+        name: false,
+        lastName: false,
+        phone: false,
+        email: false,
+        message: false,
+    }
+
+        let lastName = document.getElementById('last-name')
+        let phone = document.getElementById('phone')
+        let email = document.getElementById('email')
+        let message = document.getElementById('message')
+        let name = document.getElementById('name')
+        let loadingText = document.getElementById('loading-text1')
+        let loadingBar = document.getElementById('loading-bar1')
+        let decimal1 = document.getElementById('after1')
+        let decimal2 = document.getElementById('after2')
+        let decimal3 = document.getElementById('after3')
+
+        name.classList.remove('valid-field');
+        lastName.classList.remove('valid-field');
+        phone.classList.remove('valid-field');
+        email.classList.remove('valid-field');
+        message.classList.remove('valid-field');
+        loadingText.classList.remove('loading-text');
+        loadingBar.classList.remove('loading-bar');
+        decimal1.classList.remove('decimal1')
+        decimal2.classList.remove('decimal2')
+        decimal3.classList.remove('decimal3')
+
+        const nameError = document.getElementById("name-error");
+        const lastNameError = document.getElementById("last-name-error");
+        const emailError = document.getElementById("email-error");
+        const phoneError = document.getElementById("phone-error");
+        const messageError = document.getElementById("message-error");
+
+        if(name.value === ""){
+            nameError.innerHTML = "The field must be filled in"
+            validFields.name = false;
+        }else if(name.value.length < 2){
+            nameError.innerHTML = "The field must be at least 3 characters long";
+            validFields.name = false;
+        }else{
+            nameError.innerHTML = ""
+            validFields.name = true;
+            name.classList.add('valid-field');
+            name.value = capitalizeFirstLetter(name.value)
+        }
+
+        if(lastName.value === ""){
+            lastNameError.innerHTML = "The field must be filled in"
+            validFields.lastName = false;
+        }else if(lastName.value.length < 2){
+            lastNameError.innerHTML = "The field must be at least 3 characters long";
+            validFields.lastName = false;
+        }else{
+            lastNameError.innerHTML = ""
+            validFields.lastName = true;
+            lastName.classList.add('valid-field');
+            lastName.value = capitalizeFirstLetter(name.value)
+        }
+
+        if(email.value === ""){
+            emailError.innerHTML = "The field must be filled in";
+            validFields.email = false;
+        } else if(!validateEmail(email.value)){
+            emailError.innerHTML = "Email address is incorrect";
+            validFields.email = false;
+        }else{
+            validFields.email = true;
+            email.classList.add('valid-field');
+            emailError.innerHTML = ""
+        }
+
+        if(phone.value === ""){
+            validFields.phone = false;
+            phoneError.innerHTML = "The field must be filled in"
+        }else if(isNaN(phone.value)){
+            validFields.phone = false;
+            phoneError.innerHTML = "The phone number must contain only digits"
+        }else if(phone.value.length != 10){
+            validFields.phone = false;
+            phoneError.innerHTML = "Phone number must be at least 10 characters long"
+        }else{
+            validFields.phone = true;
+            phone.classList.add('valid-field');
+            phoneError.innerHTML = "";
+        }
+
+        if(message.value === ""){
+            messageError.innerHTML = "The field must be filled in";
+            validFields.message = false;
+        }else{
+            validFields.message = true;
+            message.classList.add('valid-field');
+            messageError.innerHTML = ""
+        }
+
+        
+        if(validFields.name === true, validFields.lastName === true, validFields.email === true, validFields.phone === true, validFields.message === true){
+            decimal1.classList.add('decimal1')
+            decimal2.classList.add('decimal2')
+            decimal3.classList.add('decimal3')
+            loadingBar.classList.add('loading-bar')
+            loadingText.classList.add('loading-text')
+            loadingText.innerHTML = 'Loading ' 
+            decimal1.innerText = '.'
+            decimal2.innerText = '.'
+            decimal3.innerText = '.'
+            return setTimeout( () =>{
+            emailConfig.classList.remove('contact')
+            emailConfig.classList.add('unvisitable')
+            btnShow.classList.add('btn-show')
+            btnShow.classList.remove('unvisitable-btn')
+            alert('Thank you for your message')
+        },11000);
+    }
+    }
+    )
+
+
+    btnShow.addEventListener('click', function(){
+        emailConfig.classList.remove('unvisitable')
+        emailConfig.classList.add('contact')
+        btnShow.classList.remove('btn-show')
+        btnShow.classList.add('unvisitable-btn')
+    })
+
+    close.addEventListener('click', function(){
+        emailConfig.classList.remove('contact')
+        emailConfig.classList.add('unvisitable')
+        btnShow.classList.add('btn-show')
+        btnShow.classList.remove('unvisitable-btn')
+    })
+
+
+
+    const list = document.querySelectorAll(".list");
+    function activeLink(){
+        list.forEach((item) => item.classList.remove("active"));
+        this.classList.add("active");
+    }
+    list.forEach((item) => item.addEventListener("click", activeLink));
+
+
+    window.addEventListener('scroll', function() {
+        let value = window.scrollY;
+        stars.style.left = value *0.25 + 'px';
+        moon.style.top = value *1.05 + 'px';
+        mountains_behind.style.top = value *0.5 + 'px';
+        mountains_front.style.top = value *0 + 'px';
+        text.style.marginRight = value *4 + 'px';
+        text.style.marginTop = value *1.5 + 'px';
+        btn.style.marginTop = value *1.5 + 'px';
+    })
+
+    }
+</script>
+</html>

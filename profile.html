@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><body>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<div id="web-page">
+    <div id="mother">
+    <div id="left-bar">
+        <div class="navigator">
+            <ul>
+                <li class="list">
+                    <a href="./home.html">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+                <li class="list active">
+                    <a href="./profile.html">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./contact-us.html">
+                        <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+                        <span class="title">Contact us</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./settings.html">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./help.html">
+                        <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+            
+            </ul>
+            </div>
+            
+    </div>
+
+    <div>
+        <div class="profile-container">
+            <div class="drag-area">
+                <ion-icon id="icon" class="icon-change" name="person-outline"></ion-icon>
+                <div class="change-image">
+                    <button class="change-image-btn">Change Picture</button>
+                    <input type="file" hidden>
+                </div>    
+            </div>
+            <br>
+            <div class="name-container">
+                <div>Candrea Ionut</div>
+            </div>
+            <div class="descriptions-container">
+                <div>
+                    <span>Email :  </span>
+                    <span class="client-email" id="client-email"></span>    
+                </div>
+                <br>
+                <div>
+                    <span>Telephone :  </span>
+                    <span class="client-name" id="client-name"></span>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <img src="./images/moon.png" id="moon">
+        <img src="./images/stars.png" id="stars">
+        <img src="./images/mountains_behind.png" id="mountains_behind">
+        <img src="./images/mountains_front.png" id="mountains_front">
+    </section>
+    </div>
+</div>
+
+</body>
+<script>
+
+let stars = document.getElementById('stars')
+    let moon = document.getElementById('moon')
+    let mountains_behind = document.getElementById('mountains_behind')
+    let text = document.getElementById('text')
+    let btn = document.getElementById('btn')
+    let mountains_front = document.getElementById('mountains_front')
+    let icon = document.getElementById("icon")
+
+    const list = document.querySelectorAll(".list");
+    function activeLink(){
+        list.forEach((item) => item.classList.remove("active"));
+        this.classList.add("active");
+    }
+    list.forEach((item) => item.addEventListener("click", activeLink));
+
+    const dropArea = document.querySelector(".drag-area"),
+    button = dropArea.querySelector("button"),
+    input = dropArea.querySelector("input");
+    let file;
+
+    button.onclick = ()=>{
+    input.click();
+    }
+
+    input.addEventListener("change", function(){
+    file = this.files[0];
+    showFile(); 
+    });
+
+    dropArea.addEventListener("dragover", (event)=>{
+    event.preventDefault(); 
+    dropArea.classList.add("active");
+    dragText.textContent = "Release to Upload File";
+    });
+
+    dropArea.addEventListener("dragleave", ()=>{
+    dropArea.classList.remove("active");
+    dragText.textContent = "Drag & Drop to Upload File";
+    });
+
+    dropArea.addEventListener("drop", (event)=>{
+    event.preventDefault();
+    file = event.dataTransfer.files[0];
+    showFile();
+    });
+
+    function showFile(){
+    let fileType = file.type;
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; 
+    if(validExtensions.includes(fileType)){ 
+        let fileReader = new FileReader(); 
+        fileReader.onload = ()=>{
+        let fileURL = fileReader.result; 
+        let imgTag = `<img src="${fileURL}" alt="">`; 
+        dropArea.innerHTML = imgTag;
+        }
+        fileReader.readAsDataURL(file);
+    }else{
+        alert("This is not an Image File!");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    }
+
+    window.addEventListener('scroll', function() {
+        let value = window.scrollY;
+        stars.style.left = value *0.25 + 'px';
+        moon.style.top = value *1.05 + 'px';
+        mountains_behind.style.top = value *0.5 + 'px';
+        mountains_front.style.top = value *0 + 'px';
+        text.style.marginRight = value *4 + 'px';
+        text.style.marginTop = value *1.5 + 'px';
+        btn.style.marginTop = value *1.5 + 'px';
+
+    })
+
+</script>
+</html>

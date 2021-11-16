@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <title>Clients</title>
+
+    <style>
+        .table-row{
+            display: grid;
+            grid-template-columns: 50px 200px 150px 150px 1fr 50px 50px;
+            text-align: center;
+            grid-gap: 24px;
+            border-bottom: 1px solid #666;
+
+        }
+
+        .row-cell{
+            text-align: center;
+        }
+
+        #email-cell{
+            font-style: italic;
+            padding: 20px;
+
+        }
+
+        #id-cell{
+            background: rgba(255, 255, 0, 0.459);
+            text-align: center;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        #name-cell{
+            font-style: inherit;
+            padding: 20px;
+        }
+
+        #phone-cell{
+            padding: 20px;
+        }
+
+        #description-cell{
+            padding: 20px;
+        }
+
+        .action-button{
+            display: grid;
+            align-content:center;
+            justify-content: center;
+        }
+
+        .delete-button{
+            color:red;
+            cursor: pointer;
+        }
+
+        .edit-button{
+            color:blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+<div id="clients-wrapper"></div>
+
+</body>
+
+<script>
+
+window.onload = () => {
+
+    const test = (e)=>{
+        console.log('test');
+        console.log(e)
+    }
+
+    const buildData =async () =>{
+
+    await fetch('http://localhost:5000/api/clients').then(response => response.json())
+        .then(data => {
+            if(data){
+                const wrapper = document.getElementById("clients-wrapper");
+                wrapper.innerHTML=`
+                    <div class="table-row" id="table-header">
+                    
+                    <div>Id</div>
+                    <div>Name</div>
+                    <div>Email</div>
+                    <div>Telephone</div>
+                    <div>Presentation</div>
+                    <div>Modify</div>
+                    <div>Delete</div>
+                    
+                    </div>
+                `;
+                data.forEach((element, index) => {
+                    wrapper.innerHTML = `${wrapper.innerHTML}
+                    <div class="table-row">
+
+                    <div id="id-cell" class="row-cell">${index+1}</div>
+                    <div id="name-cell" class="row-cell">${element.name} ${element.lastName}</div>
+                    <div id="email-cell" class="row-cell">${element.address}</div>
+                    <div id="phone-cell" class="row-cell">${element.telephone}</div>
+                    <div id="description-cell" class="row-cell">${element.presentation}</div>
+                    <div class="action-button edit-button"><a href="client.html?${element._id}"><i class="fas fa-user-edit"></i></a></div>
+                    <div id="delete_${element._id}"  class="action-button delete-button" ><i class="fas fa-trash-alt"></i></div>
+
+
+                    <table-row>
+
+                    `
+                    const deleteButton = document.getElementById(`delete_${element._id}`);
+            
+            
+        
+                })
+                return data
+            }
+
+        }).then(data=> {
+            data.forEach((element, index) => {
+                const deleteButton = document.getElementById(`delete_${element._id}`);
+                deleteButton.addEventListener("click", async (e) =>{
+                console.log(element._id)
+
+                await fetch(`http://localhost:5000/api/clients/${element._id}`,{
+            method: 'DELETE',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(response => response.json())
+                    .then(data => {
+
+                        buildData()
+                        if(data){
+                            console.log(data)
+                        }
+                    })
+            });
+            })
+
+        });
+    }
+
+    buildData()
+    }
+
+</script>
+
+</html>

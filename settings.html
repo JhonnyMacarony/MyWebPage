@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><body>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<div id="web-page">
+    <div id="mother">
+    <div id="left-bar">
+        <div class="navigator">
+            <ul>
+                <li class="list ">
+                    <a href="./home.html">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="profile.html">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./contact-us.html">
+                        <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+                        <span class="title">Contact us</span>
+                    </a>
+                </li>
+                <li class="list active">
+                    <a href="./settings.html">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./help.html">
+                        <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+            
+            </ul>
+            </div>
+            
+    </div>
+
+
+    <section>
+        <img src="./images/moon.png" id="moon">
+        <img src="./images/stars.png" id="stars">
+        <img src="./images/mountains_behind.png" id="mountains_behind">
+        <img src="./images/mountains_front.png" id="mountains_front">
+    </section>
+    </div>
+</div>
+
+</body>
+<script>
+
+let stars = document.getElementById('stars')
+    let moon = document.getElementById('moon')
+    let mountains_behind = document.getElementById('mountains_behind')
+    let text = document.getElementById('text')
+    let btn = document.getElementById('btn')
+    let mountains_front = document.getElementById('mountains_front')
+
+    const list = document.querySelectorAll(".list");
+    function activeLink(){
+        list.forEach((item) => item.classList.remove("active"));
+        this.classList.add("active");
+    }
+    list.forEach((item) => item.addEventListener("click", activeLink));
+
+
+    window.addEventListener('scroll', function() {
+        let value = window.scrollY;
+        stars.style.left = value *0.25 + 'px';
+        moon.style.top = value *1.05 + 'px';
+        mountains_behind.style.top = value *0.5 + 'px';
+        mountains_front.style.top = value *0 + 'px';
+        text.style.marginRight = value *4 + 'px';
+        text.style.marginTop = value *1.5 + 'px';
+        btn.style.marginTop = value *1.5 + 'px';
+
+    })
+
+</script>
+</html>

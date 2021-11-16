@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+    <style>
+body{
+    box-sizing: border-box;
+    margin: 0;
+    background-image: url('./background_image.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#form-container{
+    width: 400px;
+    height: 100vh;
+    background-color: hsla(201, 100%, 6%, 0.6);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+#form-content{
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+#form-actions{
+    justify-content: end;
+}
+.input-element{
+    padding: 8px;
+    margin: 16px 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-element-text{
+    padding: 8px;
+    margin: 16px 0 0 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-field{
+    position: relative;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+.text-field{
+    height: 250px;
+}
+
+.valid-field{
+    color: green;
+}
+
+.error-message{
+    color: red;
+    font-size: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    bottom: -4px;
+    right: 0px;
+}
+
+.error-message-text{
+    text-align: right;
+    position: relative;
+}
+
+.my-image{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.login-title{
+    color: white;
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+.login-button{
+    padding: 10px 30px;
+    width: 40%;
+    border-radius: 5px;
+    background-color: hsla(201, 100%, 50%, 0.1);
+    border: 1px solid hsl(201, 100%, 50%,);
+    outline: none;
+    font-size: 1.5em;
+    color: white;
+    font-weight: lighter;
+    margin: 10px;
+    cursor: pointer;
+    margin-left: 225px;
+}
+.login-button:hover{
+    background-color: hsla(201, 100%, 50%, 0.3);
+}
+
+.login-button:focus{
+    background-color: hsla(201, 100%, 50%, 0.5);
+}
+.input-group input{
+    font-size: 1.2em;
+    padding: .3em .3em;
+    background-color: hsla(201, 100%, 91%, 0.76);
+    border: 1px solid hsl(201, 100%, 6%,);
+    outline: none;
+    border-radius: 5px;
+    font-weight: lighter;
+}
+
+.input-group input:focus{
+    border: 1px solid hsl(201, 100%, 50%,)
+}
+.presentation{
+    font-size: 1.2em;
+    padding: .3em .3em;
+    background-color: hsla(201, 100%, 91%, 0.76);
+    outline: none;
+    border-radius: 5px;
+    font-weight: lighter;
+    border: solid 2px rgb(0, 20, 31);
+}
+::-webkit-scrollbar {
+    max-width: 10px;
+    
+}
+::-webkit-scrollbar-track {
+    background: hsla(201, 100%, 91%, 0.76); 
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px; 
+    padding: 1px;
+}
+::-webkit-scrollbar-thumb {
+    background: hsla(201, 100%, 6%, 0.466);
+    border-radius: 5px; 
+    padding: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 20, 31, 0.685);;
+}
+</style>
+</head>
+<body>
+
+    <div id="form-container">
+        <div  class="login-title">
+            <h2>Welcome</h2>
+        </div>
+        <div id="title" class="form-headers"></div>
+        <form id="form-content">
+            <div class="input-field input-group">
+                <input id="name" class="input-element" type="text" required placeholder="Your name">
+                <div id="name-error" class="error-message"></div>
+            </div>
+            <div class="input-field input-group">
+                <input id="last-name" class="input-element" type="text" required placeholder="Last name">
+                <div id="last-name-error" class="error-message"></div>
+            </div>
+            <div class="input-field input-group">
+                <input id="address" class="input-element" type="email" placeholder="Email address">
+                <div id="address-error" class="error-message"></div>
+            </div>
+            <div class="input-field input-group">
+                <input id="telephone" class="input-element" type="tel" placeholder="Phone number">
+                <div id="telephone-error" class="error-message"></div>
+            </div>
+            <div class="input-field input-group">
+                <input id="password" class="input-element" type="password" placeholder="Password">
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="input-field input-group">
+                <input id="password-chk" class="input-element" type="password" placeholder="Verify Password">
+                <div id="password-chk-error" class="error-message"></div>
+            </div>
+            <div class="input-field">
+                <textarea id="presentation" class="input-element-text presentation" rows="10" placeholder="Your presentation"></textarea>
+                <div id="presentation-error" class="error-message error-message-text"></div>
+            </div>
+        </form>
+        <div id="form-actions" class="form-headers">
+            <button class="login-button" type="button" onclick="submit()">Sign In</button>
+        </div>
+        </div> 
+        
+</body>
+
+<script>
+
+window.onload = function() {
+    console.log(window.location.href);
+    var title = "log in"
+    const titleContainer = document.getElementById('')
+    const capitalizeFirstLetter = function(string){
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    }
+
+    const validateEmail = function(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase())
+    }
+
+    const validatePassword = function(pass){
+        const re = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        return re.test(String(pass).toLowerCase())
+    }
+    
+    submit = async function(){
+
+        let formValid = true;
+
+        let validFields ={
+            name: false,
+            lastName: false,
+            phoneNumber: false,
+            address: false,
+            password: false,
+            passwordChk: false,
+            presentation: false,
+        }
+
+        let name = document.getElementById("name");
+        let lastName = document.getElementById("last-name");
+        let telephone = document.getElementById("telephone");
+        let address = document.getElementById("address");
+        let password = document.getElementById("password");
+        let passwordChk = document.getElementById("password-chk");
+        let presentation = document.getElementById("presentation");
+
+        name.classList.remove('valid-field');
+        lastName.classList.remove('valid-field');
+        address.classList.remove('valid-field');
+        telephone.classList.remove('valid-field');
+        password.classList.remove('valid-field');
+        passwordChk.classList.remove('valid-field');
+        presentation.classList.remove('valid-field');
+
+        const nameError = document.getElementById("name-error");
+        const lastNameError = document.getElementById("last-name-error");
+        const addressError = document.getElementById("address-error");
+        const telephoneError = document.getElementById("telephone-error");
+        const passwordError = document.getElementById("password-error");
+        const passwordChkError = document.getElementById("password-chk-error");
+        const presentationError = document.getElementById("presentation-error");
+
+        if(name.value === ''){
+            nameError.innerHTML = 'The field must be filled in'
+            validFields.name = false;
+        }else if(name.value.length < 2){
+            nameError.innerHTML = 'The field must be at least 3 characters long'
+            validFields.name = false;
+        }else{
+            validFields.name = true;
+            nameError.innerHTML = ""
+            name.classList.add('valid-field');
+            name.value = capitalizeFirstLetter(name.value)
+        }
+
+        if(lastName.value === ''){
+            lastNameError.innerHTML = 'The field must be filled in';
+            validFields.lastName = false;
+        }else if(lastName.value.length < 3){
+            lastNameError.innerHTML = 'The field must be at least 3 characters long'
+            validFields.lastName = false;
+        }else{
+            validFields.lastName = true;
+            lastNameError.innerHTML = "";
+            lastName.classList.add('valid-field')
+            lastName.value = capitalizeFirstLetter(lastName.value);
+        }
+
+        if(address === ""){
+            addressError.innerHTML = "The field must be filled in";
+            validFields.address = false;
+        } else if(!validateEmail(address.value)){
+            addressError.innerHTML = "Email address is incorrect";
+            validFields.address = false;
+        }else{
+            validFields.address = true;
+            address.classList.add('valid-field');
+            addressError.innerHTML = ""
+        }
+
+        if(password === ""){
+            passwordError.innerHTML = "The field must be filled in";
+            validFields.password = false;
+        } else if(!validatePassword(password.value)){
+            validFields.password = false;
+            passwordError.innerHTML = "The password does not contain special characters";
+        }
+
+        if(passwordChk === ""){
+            passwordChkError.innerHTML = "The field must be filled in";
+            validFields.passwordChk = false;
+        } else if( passwordChk.value != password.value){
+            validFields.passwordChk = false;
+            validFields.password = false;
+            passwordChkError.innerHTML = "Passwords do not match";
+            passwordError.innerHTML = "Passwords do not match"
+        } else{
+            validFields.password = true;
+            validFields.passwordChk = true;
+            password.classList.add('valid-field');
+            passwordChk.classList.add('valid-field')
+            passwordChkError.innerHTML = "";
+            passwordError.innerHTML = "";
+            password.value = passwordChk.value;
+        }
+
+        if(telephone === ""){
+            validFields.telephone = false;
+            telephoneError.innerHTML = "The field must be filled in"
+        }else if(isNaN(telephone.value)){
+            validFields.telephone = false;
+            telephoneError.innerHTML = "The phone number must contain only digits"
+        }else if(telephone.value.length != 10){
+            validFields.telephone = false;
+            telephoneError.innerHTML = "Phone number must be at least 10 characters long"
+        }else{
+            validFields.telephone = true;
+            telephone.classList.add('valid-field');
+            telephoneError.innerHTML = "";
+        }
+
+        if(presentation === ""){
+            presentationError.innerHTML = "The field must be filled in";
+            validFields.presentation = false;
+        }else if(presentation.value.length < 30){
+            presentationError.innerHTML = "This presentation must contain at least 30 letters";
+            validFields.presentation = false;
+        }else{
+            validFields.presentation = true;
+            presentation.classList.add('valid-field');
+            presentationError.innerHTML = ""
+        }
+
+        Object.keys(validFields).forEach(key =>{
+            console.log(validFields[key]);
+            if(!validFields[key]){
+                console.log(key);formValid = false
+            }
+        })
+
+        if(formValid){
+            let response = {
+                name : name.value,
+                lastName : lastName.value,
+                address : address.value,
+                telephone : telephone.value,
+                password : password.value,
+                presentation : presentation.value,
+            };
+
+            let postClient = async (data) => {
+            return await fetch(`http://localhost:5000/api/clients/upload/${id}`,{
+                method: 'PUT',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+              .then(data => data);
+        }
+
+        let myClient = await postClient(response)
+
+        }else{
+            alert("THERE ARE INVALID FIELDS")
+        }
+    }
+}
+</script>
+
+</html>
